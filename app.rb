@@ -1,8 +1,11 @@
+require 'sinatra/reloader'
+require './idea'
+
 class IdeaBoxApp < Sinatra::Base
-	configure :development do
-		register Sinatra::Reloader
-		require './idea'
-	end
+	set :method_override, true
+		configure :development do
+			register Sinatra::reloader
+		end
 
 	#Your modular code goes here
 	not_found do
@@ -10,15 +13,17 @@ class IdeaBoxApp < Sinatra::Base
 	end
 
 	get '/' do
-		"<h1>Hello, World!</h1><blockquote>I guess I always felt even if the world came to an end, McDonald's would still be open. <cite>Susan Beth Pfeffer</cite></blockquote>"
+		erb :index, locals: {ideas: Idea.all}
 	end
 
 	post '/' do
-		# 1. Create an idea based on the form parameters
-		idea = Idea.new
-	  # 2. Store it
-	  idea.save
-	  # 3. Send us back to the index page to see all ideas
-	  "Creating an IDEA!"
+		idea = Idea.new(params['idea_title'], params['idea_description'])
+  	idea.save
+  	redirect '/'
 	end
+
+	delete '/:index' do |index|
+    Idea.delete(index.to_i)
+    redirect '/'
+  end
 end
