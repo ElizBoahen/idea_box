@@ -4,12 +4,11 @@ class IdeaBoxApp < Sinatra::Base
 	end
 
 	#Your modular code goes here
-end
 	not_found do
 		erb :error
 	end
 
 	get '/' do
-		"Hello, world"
+		"<h1>Hello, World!</h1><blockquote>I guess I always felt even if the world came to an end, McDonald's would still be open. <cite>Susan Beth Pfeffer</cite></blockquote>"
 	end
 end
