@@ -37,7 +37,7 @@ class Idea
 	    db['ideas'] << {title: title, description: description}
 	  end
 	end
-	
+
 	def database
 	    Idea.database
 	  end
@@ -47,4 +47,4 @@ class Idea
 #  def database
 #    @database ||= YAML::Store.new "ideabox"
 #  end
-3end
+#end
