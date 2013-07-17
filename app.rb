@@ -16,7 +16,12 @@ class IdeaBoxApp < Sinatra::Base
 		idea = IdeaStore.find(id.to_i)
 		idea.like!
 		IdeaStore.update(id.to_i, idea.to_h)
+		redirect '/'
 	  "I like this idea!"
+	end
+	
+	def like!
+	  @rank += 1
 	end
 
 	get '/' do
